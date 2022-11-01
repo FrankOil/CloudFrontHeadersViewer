@@ -1,5 +1,5 @@
 import { App } from "aws-cdk-lib";
-import { Template } from "aws-cdk-lib/assertions";
+import { Match, Template } from "aws-cdk-lib/assertions";
 import { WebsiteStack } from "../lib/website-stack";
 
 test("WebsiteStack Created", () => {
@@ -24,13 +24,18 @@ test("WebsiteStack Created", () => {
 	template.hasResourceProperties("AWS::S3::BucketPolicy", {
 		PolicyDocument: {
 			Statement: [
-				{
+				Match.objectLike({
+					Action: "s3:*",
 					Condition: {
 						Bool: {
 							"aws:SecureTransport": "false"
 						}
+					},
+            		Effect: "Deny",
+					Principal: {
+						AWS: "*"
 					}
-				},
+				})
 			]
 		},
 	});
