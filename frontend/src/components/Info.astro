@@ -1,1 +1,18 @@
-<h1>test</h1>
+---
+const rows = ["IP Address", "Country", "Region", "City", "Latitude", "Longitude", "Postal code", "Time zone"];
+---
+
+<div class='grid'>
+	<div class='sm:w-1/2 place-self-center'>
+		<dl>
+			{
+				rows.map((row) => (
+					<div class='py-5 px-5 sm:grid sm:grid-cols-3 sm:gap-4 text-center'>
+						<dt class='text-base font-medium'>{row}:</dt>
+						<dd class='text-base mt-1 sm:col-span-2 sm:mt-0' />
+					</div>
+				))
+			}
+		</dl>
+	</div>
+</div>
