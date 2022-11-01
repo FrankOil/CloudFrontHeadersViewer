@@ -19,6 +19,13 @@ test("WebsiteStack Created", () => {
 				},
 			],
 		},
+		OwnershipControls: {
+			Rules: [
+				Match.objectLike({
+					ObjectOwnership: "BucketOwnerEnforced",
+				}),
+			],
+		},
 	});
 
 	template.hasResourceProperties("AWS::S3::BucketPolicy", {
@@ -28,15 +35,15 @@ test("WebsiteStack Created", () => {
 					Action: "s3:*",
 					Condition: {
 						Bool: {
-							"aws:SecureTransport": "false"
-						}
+							"aws:SecureTransport": "false",
+						},
 					},
-            		Effect: "Deny",
+					Effect: "Deny",
 					Principal: {
-						AWS: "*"
-					}
-				})
-			]
+						AWS: "*",
+					},
+				}),
+			],
 		},
 	});
 });
