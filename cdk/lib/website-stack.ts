@@ -1,5 +1,5 @@
 import { Stack, StackProps } from "aws-cdk-lib";
-import { Bucket, BucketEncryption, ObjectOwnership } from "aws-cdk-lib/aws-s3";
+import { BlockPublicAccess, Bucket, BucketEncryption, ObjectOwnership } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
 
 export class WebsiteStack extends Stack {
@@ -10,6 +10,7 @@ export class WebsiteStack extends Stack {
 			encryption: BucketEncryption.S3_MANAGED, // Required by OAI (Origin Access Identity).
 			enforceSSL: true,
 			objectOwnership: ObjectOwnership.BUCKET_OWNER_ENFORCED,
+			blockPublicAccess: BlockPublicAccess.BLOCK_ALL
 		});
 	}
 }

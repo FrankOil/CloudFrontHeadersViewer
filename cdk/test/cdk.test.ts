@@ -26,6 +26,12 @@ test("WebsiteStack Created", () => {
 				}),
 			],
 		},
+		PublicAccessBlockConfiguration: {
+			BlockPublicAcls: true,
+			BlockPublicPolicy: true,
+			IgnorePublicAcls: true,
+			RestrictPublicBuckets: true,
+		},
 	});
 
 	template.hasResourceProperties("AWS::S3::BucketPolicy", {
