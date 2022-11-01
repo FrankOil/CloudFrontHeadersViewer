@@ -9,10 +9,21 @@ const rows = ["IP Address", "Country", "Region", "City", "Latitude", "Longitude"
 				rows.map((row) => (
 					<div class='py-5 px-5 sm:grid sm:grid-cols-3 sm:gap-4 text-center'>
 						<dt class='text-base font-medium'>{row}:</dt>
-						<dd class='text-base mt-1 sm:col-span-2 sm:mt-0' />
+						<dd class='text-base mt-1 sm:col-span-2 sm:mt-0' id={row.toLowerCase()}/>
 					</div>
 				))
 			}
 		</dl>
 	</div>
 </div>
+<script>
+	import Cookies from 'js-cookie';
+
+	try {
+		const content = JSON.parse(Cookies.get('data'));
+
+		Object.entries(content).forEach(([key, value]) => {
+			document.getElementById(key).textContent = value as string;
+		})
+	} catch(error) {}
+</script>
