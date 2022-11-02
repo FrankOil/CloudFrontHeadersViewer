@@ -1,7 +1,7 @@
 import { Stack, StackProps } from "aws-cdk-lib";
 import {
 	CachePolicy,
-	Distribution, Function, FunctionCode, HttpVersion,
+	Distribution, Function, FunctionCode, FunctionEventType, HttpVersion,
 	OriginRequestHeaderBehavior,
 	OriginRequestPolicy,
 	SecurityPolicyProtocol,
@@ -48,6 +48,12 @@ export class WebsiteStack extends Stack {
 				viewerProtocolPolicy: ViewerProtocolPolicy.HTTPS_ONLY,
 				cachePolicy: CachePolicy.CACHING_DISABLED,
 				originRequestPolicy: distributionOriginRequestPolicy,
+				functionAssociations: [
+					{
+						function: responseFunction,
+						eventType: FunctionEventType.VIEWER_REQUEST,
+					},
+				],
 			},
 			defaultRootObject: "index.html",
 			httpVersion: HttpVersion.HTTP2_AND_3,
