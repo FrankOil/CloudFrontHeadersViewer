@@ -1,8 +1,16 @@
 import { Stack, StackProps } from "aws-cdk-lib";
-import { CachePolicy, Distribution, HttpVersion, OriginRequestHeaderBehavior, OriginRequestPolicy, SecurityPolicyProtocol, ViewerProtocolPolicy } from "aws-cdk-lib/aws-cloudfront";
+import {
+	CachePolicy,
+	Distribution, Function, FunctionCode, HttpVersion,
+	OriginRequestHeaderBehavior,
+	OriginRequestPolicy,
+	SecurityPolicyProtocol,
+	ViewerProtocolPolicy
+} from "aws-cdk-lib/aws-cloudfront";
 import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import { BlockPublicAccess, Bucket, BucketEncryption, ObjectOwnership } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
+import * as path from "path";
 
 export class WebsiteStack extends Stack {
 	constructor(scope: Construct, id: string, props?: StackProps) {
@@ -15,6 +23,12 @@ export class WebsiteStack extends Stack {
 			blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
 		});
 
+		const responseFunction = new Function(this, "ResponseFunction", {
+			code: FunctionCode.fromFile({
+				filePath: path.join(__dirname, "../functions/response.js"),
+			}),
+		});
+
 		const distributionOriginRequestPolicy = new OriginRequestPolicy(this, "DistributionOriginRequestPolicy", {
 			headerBehavior: OriginRequestHeaderBehavior.allowList(
 				"cloudfront-viewer-address",
@@ -24,8 +38,8 @@ export class WebsiteStack extends Stack {
 				"cloudfront-viewer-latitude",
 				"cloudfront-viewer-longitude",
 				"cloudfront-viewer-postal-code",
-				"cloudfront-viewer-time-zone"
-			)
+				"cloudfront-viewer-time-zone",
+			),
 		});
 
 		new Distribution(this, "Distribution", {
