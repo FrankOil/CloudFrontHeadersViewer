@@ -1,5 +1,5 @@
 import { Stack, StackProps } from "aws-cdk-lib";
-import { CachePolicy, Distribution, HttpVersion, SecurityPolicyProtocol, ViewerProtocolPolicy } from "aws-cdk-lib/aws-cloudfront";
+import { CachePolicy, Distribution, HttpVersion, OriginRequestHeaderBehavior, OriginRequestPolicy, SecurityPolicyProtocol, ViewerProtocolPolicy } from "aws-cdk-lib/aws-cloudfront";
 import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import { BlockPublicAccess, Bucket, BucketEncryption, ObjectOwnership } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
@@ -15,11 +15,25 @@ export class WebsiteStack extends Stack {
 			blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
 		});
 
+		const distributionOriginRequestPolicy = new OriginRequestPolicy(this, "DistributionOriginRequestPolicy", {
+			headerBehavior: OriginRequestHeaderBehavior.allowList(
+				"cloudfront-viewer-address",
+				"cloudfront-viewer-country",
+				"cloudfront-viewer-country-region-name",
+				"cloudfront-viewer-city",
+				"cloudfront-viewer-latitude",
+				"cloudfront-viewer-longitude",
+				"cloudfront-viewer-postal-code",
+				"cloudfront-viewer-time-zone"
+			)
+		});
+
 		new Distribution(this, "Distribution", {
 			defaultBehavior: {
 				origin: new S3Origin(frontendBucket),
 				viewerProtocolPolicy: ViewerProtocolPolicy.HTTPS_ONLY,
 				cachePolicy: CachePolicy.CACHING_DISABLED,
+				originRequestPolicy: distributionOriginRequestPolicy,
 			},
 			defaultRootObject: "index.html",
 			httpVersion: HttpVersion.HTTP2_AND_3,
