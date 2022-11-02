@@ -1,5 +1,5 @@
 import { Stack, StackProps } from "aws-cdk-lib";
-import { Distribution, HttpVersion, SecurityPolicyProtocol, ViewerProtocolPolicy } from "aws-cdk-lib/aws-cloudfront";
+import { CachePolicy, Distribution, HttpVersion, SecurityPolicyProtocol, ViewerProtocolPolicy } from "aws-cdk-lib/aws-cloudfront";
 import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import { BlockPublicAccess, Bucket, BucketEncryption, ObjectOwnership } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
@@ -18,7 +18,8 @@ export class WebsiteStack extends Stack {
 		new Distribution(this, "Distribution", {
 			defaultBehavior: {
 				origin: new S3Origin(frontendBucket),
-				viewerProtocolPolicy: ViewerProtocolPolicy.HTTPS_ONLY
+				viewerProtocolPolicy: ViewerProtocolPolicy.HTTPS_ONLY,
+				cachePolicy: CachePolicy.CACHING_DISABLED,
 			},
 			defaultRootObject: "index.html",
 			httpVersion: HttpVersion.HTTP2_AND_3,
