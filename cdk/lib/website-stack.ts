@@ -9,6 +9,7 @@ import {
 } from "aws-cdk-lib/aws-cloudfront";
 import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import { BlockPublicAccess, Bucket, BucketEncryption, ObjectOwnership } from "aws-cdk-lib/aws-s3";
+import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import { Construct } from "constructs";
 import * as path from "path";
 
@@ -21,6 +22,11 @@ export class WebsiteStack extends Stack {
 			enforceSSL: true,
 			objectOwnership: ObjectOwnership.BUCKET_OWNER_ENFORCED,
 			blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
+		});
+
+		new BucketDeployment(this, "FrontendBucketDeployment", {
+			sources: [Source.asset(path.join(__dirname, "../../frontend/dist"))],
+			destinationBucket: frontendBucket,
 		});
 
 		const responseFunction = new Function(this, "ResponseFunction", {
