@@ -14,8 +14,6 @@
     "noUnusedParameters": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": false,
-    "inlineSourceMap": true,
-    "inlineSources": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "typeRoots": [
