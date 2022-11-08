@@ -1,27 +1,45 @@
 name: CI/CD
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
 
 jobs:
-  cdk-build:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: cdk
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'yarn'
-        cache-dependency-path: cdk/yarn.lock
-    - name: Install Dependencies
-      run: yarn install --frozen-lockfile
-    - name: Lint the codebase
-      run: yarn lint
+    frontend-build:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: frontend
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  cache: "yarn"
+                  cache-dependency-path: frontend/yarn.lock
+            - name: Install Dependencies
+              run: yarn install --frozen-lockfile
+            - name: Build Astro
+              run: yarn build
+    cdk-build:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: cdk
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  cache: "yarn"
+                  cache-dependency-path: cdk/yarn.lock
+            - name: Install Dependencies
+              run: yarn install --frozen-lockfile
+            - name: Lint the codebase
+              run: yarn lint
