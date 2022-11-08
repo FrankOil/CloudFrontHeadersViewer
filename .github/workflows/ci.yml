@@ -23,3 +23,5 @@ jobs:
         cache-dependency-path: cdk/yarn.lock
     - name: Install Dependencies
       run: yarn install --frozen-lockfile
+    - name: Lint the codebase
+      run: yarn lint
