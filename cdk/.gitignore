@@ -1,9 +1,12 @@
+# Ignore JavaScript files
 *.js
 !jest.config.js
 
+# Ignore TypeScript declaration files
 *.d.ts
 !types/**/*.d.ts
 
+# Dependencies
 node_modules
 
 # CDK asset staging directory
