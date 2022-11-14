@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@types/aws-cloudfront-function": "^1.0.2",
 		"@types/jest": "^27.5.2",
-		"@types/node": "10.17.27",
+		"@types/node": "^18.11.9",
 		"@types/prettier": "2.6.0",
 		"@typescript-eslint/eslint-plugin": "^5.42.1",
 		"@typescript-eslint/parser": "^5.42.1",
