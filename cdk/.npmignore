@@ -1,3 +1,4 @@
+# Ignore TypeScript files
 *.ts
 !*.d.ts
 
