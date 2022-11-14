@@ -10,12 +10,13 @@
 		"browser": true,
 		"es2022": true
 	},
-	"plugins": ["@typescript-eslint"],
+	"plugins": ["@typescript-eslint", "sonarjs"],
 	"extends": [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:@typescript-eslint/recommended-requiring-type-checking",
 		"plugin:@typescript-eslint/strict",
+		"plugin:sonarjs/recommended",
 		"prettier"
 	],
 	"overrides": [],
