@@ -9,7 +9,7 @@ import {
 	OriginRequestHeaderBehavior,
 	OriginRequestPolicy,
 	SecurityPolicyProtocol,
-	ViewerProtocolPolicy,
+	ViewerProtocolPolicy
 } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { BlockPublicAccess, Bucket, BucketEncryption, ObjectOwnership } from 'aws-cdk-lib/aws-s3';
@@ -33,9 +33,9 @@ export class WebsiteStack extends Stack {
 			destinationBucket: frontendBucket,
 		});
 
-		const responseFunction = new Function(this, 'ResponseFunction', {
+		const getHeadersFunction = new Function(this, 'GetHeadersFunction', {
 			code: FunctionCode.fromFile({
-				filePath: path.join(__dirname, '../functions/response.js'),
+				filePath: path.join(__dirname, '../functions/get-headers.js'),
 			}),
 		});
 
@@ -60,7 +60,7 @@ export class WebsiteStack extends Stack {
 				originRequestPolicy: distributionOriginRequestPolicy,
 				functionAssociations: [
 					{
-						function: responseFunction,
+						function: getHeadersFunction,
 						eventType: FunctionEventType.VIEWER_REQUEST,
 					},
 				],
