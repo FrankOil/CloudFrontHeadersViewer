@@ -1,5 +1,5 @@
 {
-  "name": "whatismyipaddress-frontend",
+  "name": "cloudfront-headers-viewer-frontend",
   "type": "module",
   "version": "1.0.0",
   "private": true,

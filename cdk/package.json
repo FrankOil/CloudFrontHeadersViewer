@@ -1,5 +1,5 @@
 {
-	"name": "what-is-my-ip-address",
+	"name": "cloudfront-headers-viewer-cdk",
 	"private": true,
 	"version": "1.0.0",
 	"bin": {
