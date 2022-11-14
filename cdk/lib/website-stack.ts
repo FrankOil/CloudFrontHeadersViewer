@@ -9,7 +9,7 @@ import {
 	OriginRequestHeaderBehavior,
 	OriginRequestPolicy,
 	SecurityPolicyProtocol,
-	ViewerProtocolPolicy
+	ViewerProtocolPolicy,
 } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { BlockPublicAccess, Bucket, BucketEncryption, ObjectOwnership } from 'aws-cdk-lib/aws-s3';

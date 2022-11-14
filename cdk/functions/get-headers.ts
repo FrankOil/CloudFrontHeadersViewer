@@ -52,7 +52,7 @@ function handler(event: AWSCloudFrontFunction.Event) {
 			? requestHeaders['cloudfront-viewer-time-zone'].value
 			: '';
 
-		if (requestURI !== '/' && requestURI !== '/index.html') {
+		if (requestURI !== '/') {
 			var newQueryString = querystring.stringify({
 				ip_address: viewerAddress,
 				country: viewerCountry,
