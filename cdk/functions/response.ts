@@ -1,6 +1,13 @@
-var querystring = require("querystring");
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-function handler(event: { request: any; }) {
+// Const and let statements are not supported in CloudFront Functions JavaScript runtime.
+// https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/functions-javascript-runtime-features.html
+
+var querystring = require("querystring") as typeof import("querystring");
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function handler(event: AWSCloudFrontFunction.Event) {
 	var request = event.request;
 
 	try {
@@ -12,7 +19,8 @@ function handler(event: { request: any; }) {
 
 		var requestHeaders = request.headers;
 
-		var requestURL = `https://${requestHeaders["host"].value}`;
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		var requestURL = `https://${requestHeaders["host"]!.value}`;
 
 		var viewerAddress = requestHeaders["cloudfront-viewer-address"]
 			? requestHeaders["cloudfront-viewer-address"].value
