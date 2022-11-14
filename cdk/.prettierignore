@@ -1,0 +1,9 @@
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# Dependencies
+node_modules
+
+# Ignore JavaScript files
+**/*.js
