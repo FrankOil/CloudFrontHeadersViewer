@@ -1,20 +1,20 @@
-import { App } from "aws-cdk-lib";
-import { Match, Template } from "aws-cdk-lib/assertions";
-import { WebsiteStack } from "../lib/website-stack";
+import { App } from 'aws-cdk-lib';
+import { Match, Template } from 'aws-cdk-lib/assertions';
+import { WebsiteStack } from '../lib/website-stack';
 
-test("WebsiteStack Created", () => {
+test('WebsiteStack Created', () => {
 	const app = new App();
 
-	const stack = new WebsiteStack(app, "MyTestStack");
+	const stack = new WebsiteStack(app, 'MyTestStack');
 
 	const template = Template.fromStack(stack);
 
-	template.hasResourceProperties("AWS::S3::Bucket", {
+	template.hasResourceProperties('AWS::S3::Bucket', {
 		BucketEncryption: {
 			ServerSideEncryptionConfiguration: [
 				{
 					ServerSideEncryptionByDefault: {
-						SSEAlgorithm: "AES256",
+						SSEAlgorithm: 'AES256',
 					},
 				},
 			],
@@ -22,7 +22,7 @@ test("WebsiteStack Created", () => {
 		OwnershipControls: {
 			Rules: [
 				Match.objectLike({
-					ObjectOwnership: "BucketOwnerEnforced",
+					ObjectOwnership: 'BucketOwnerEnforced',
 				}),
 			],
 		},
@@ -34,19 +34,19 @@ test("WebsiteStack Created", () => {
 		},
 	});
 
-	template.hasResourceProperties("AWS::S3::BucketPolicy", {
+	template.hasResourceProperties('AWS::S3::BucketPolicy', {
 		PolicyDocument: {
 			Statement: [
 				Match.objectLike({
-					Action: "s3:*",
+					Action: 's3:*',
 					Condition: {
 						Bool: {
-							"aws:SecureTransport": "false",
+							'aws:SecureTransport': 'false',
 						},
 					},
-					Effect: "Deny",
+					Effect: 'Deny',
 					Principal: {
-						AWS: "*",
+						AWS: '*',
 					},
 				}),
 			],
