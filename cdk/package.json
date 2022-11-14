@@ -10,7 +10,8 @@
 		"watch": "tsc -w",
 		"test": "jest",
 		"cdk": "cdk",
-		"lint": "eslint --ext .ts bin lib test"
+		"lint": "eslint --ext .ts bin lib test",
+		"clean": "rimraf ./node_modules ./cdk.out"
 	},
 	"devDependencies": {
 		"@types/jest": "^27.5.2",
