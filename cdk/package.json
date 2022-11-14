@@ -11,7 +11,9 @@
 		"test": "jest",
 		"cdk": "cdk",
 		"lint": "eslint . --ext .ts",
-		"clean": "rimraf ./node_modules ./cdk.out"
+		"clean": "rimraf ./node_modules ./cdk.out",
+		"format": "prettier --write .",
+		"format:check": "prettier --check ."
 	},
 	"devDependencies": {
 		"@types/aws-cloudfront-function": "^1.0.2",
