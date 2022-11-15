@@ -24,6 +24,8 @@ jobs:
                   cache-dependency-path: frontend/yarn.lock
             - name: Install Dependencies
               run: yarn install --frozen-lockfile
+            - name: Check The Code Style
+              run: yarn format:check
             - name: Build Astro
               run: yarn build
     cdk-build:
