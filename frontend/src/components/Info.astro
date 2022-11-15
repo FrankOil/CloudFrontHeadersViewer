@@ -1,18 +1,15 @@
 ---
-const rows = ["IP Address", "Country", "Region", "City", "Latitude", "Longitude", "Postal code", "Time zone"];
+const rows = ['IP Address', 'Country', 'Region', 'City', 'Latitude', 'Longitude', 'Postal code', 'Time zone'];
 ---
 
-<div class='grid'>
-	<div class='sm:w-1/2 place-self-center'>
+<div class="grid">
+	<div class="sm:w-1/2 place-self-center">
 		<dl>
 			{
 				rows.map((row) => (
-					<div class='py-5 px-5 sm:grid sm:grid-cols-3 sm:gap-4 text-center'>
-						<dt class='text-base font-medium'>{row}:</dt>
-						<dd
-							class='text-base mt-1 sm:col-span-2 sm:mt-0'
-							id={row.toLowerCase().replace(" ", "_")}
-						/>
+					<div class="py-5 px-5 sm:grid sm:grid-cols-3 sm:gap-4 text-center">
+						<dt class="text-base font-medium">{row}:</dt>
+						<dd class="text-base mt-1 sm:col-span-2 sm:mt-0" id={row.toLowerCase().replace(' ', '_')} />
 					</div>
 				))
 			}
@@ -22,7 +19,7 @@ const rows = ["IP Address", "Country", "Region", "City", "Latitude", "Longitude"
 <script>
 	const queryStringParams = new URLSearchParams(window.location.search);
 
-	const params = ["ip_address", "country", "region", "city", "latitude", "longitude", "postal_code", "time_zone"];
+	const params = ['ip_address', 'country', 'region', 'city', 'latitude', 'longitude', 'postal_code', 'time_zone'];
 
 	params.forEach((param) => {
 		document.getElementById(param)!.textContent = queryStringParams.get(param);
