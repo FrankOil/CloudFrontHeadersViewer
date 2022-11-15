@@ -8,6 +8,7 @@ on:
 
 jobs:
     frontend-build:
+        name: Frontend Build
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -26,6 +27,7 @@ jobs:
             - name: Build Astro
               run: yarn build
     cdk-build:
+        name: CDK Build
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -41,7 +43,7 @@ jobs:
                   cache-dependency-path: cdk/yarn.lock
             - name: Install Dependencies
               run: yarn install --frozen-lockfile
-            - name: Check the code style
-              run: yarn format:check 
-            - name: Lint the codebase
+            - name: Check The Code Style
+              run: yarn format:check
+            - name: Lint The Codebase
               run: yarn lint
