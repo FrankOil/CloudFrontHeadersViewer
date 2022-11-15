@@ -1,5 +1,14 @@
 # CloudFront Headers Viewer
-A simple website that uses a CloudFront function to display user's CloudFront HTTP headers.
+
+A simple website displaying user's CloudFront HTTP headers obtained by a CloudFront function.
+
+This project was created to test CloudFront Functions with TypeScript.
+
+## Sample results
+
+![Result](./results.png)
+
+## Architecture
 
 ![CloudFront Functions Location](https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2021/04/01/cloudfront-functions-where.png)
 [Source: AWS News Blog | Introducing CloudFront Functions – Run Your Code at the Edge with Low Latency at Any Scale](https://aws.amazon.com/blogs/aws/introducing-cloudfront-functions-run-your-code-at-the-edge-with-low-latency-at-any-scale/)
